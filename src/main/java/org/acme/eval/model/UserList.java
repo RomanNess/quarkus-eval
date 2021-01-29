@@ -5,13 +5,14 @@ import com.fasterxml.jackson.databind.annotation.JsonPOJOBuilder;
 import lombok.Builder;
 import lombok.Value;
 
+import java.util.List;
+
 @Value
 @Builder(builderClassName = "Builder")
-@JsonDeserialize(builder = User.Builder.class)
-public class User {
+@JsonDeserialize(builder = UserList.Builder.class)
+public class UserList {
 
-    Long id;
-    String username;
+    List<User> users;
 
     @JsonPOJOBuilder(withPrefix = "")
     public static class Builder {
