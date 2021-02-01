@@ -26,4 +26,17 @@ class UserResourceTest {
                 User.builder().id(2L).username("bar").build()
         );
     }
+
+    @Test
+    void get() {
+        User user = given()
+                .contentType(ContentType.JSON)
+                .when().get("/users/1")
+                .then()
+                .statusCode(200)
+                .extract().as(User.class);
+
+        assertThat(user.getId()).isEqualTo(1L);
+        assertThat(user.getUsername()).isEqualTo("foo");
+    }
 }
