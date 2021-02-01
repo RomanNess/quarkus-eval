@@ -39,4 +39,13 @@ class UserResourceTest {
         assertThat(user.getId()).isEqualTo(1L);
         assertThat(user.getUsername()).isEqualTo("foo");
     }
+
+    @Test
+    void get_404() {
+        given()
+                .contentType(ContentType.JSON)
+                .when().get("/users/666")
+                .then()
+                .statusCode(404);
+    }
 }

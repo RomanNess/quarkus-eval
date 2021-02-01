@@ -1,10 +1,10 @@
 package org.acme.eval.service;
 
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 import org.acme.eval.model.User;
 import org.acme.eval.persistence.UserEntity;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.ws.rs.NotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,7 +19,7 @@ public class UserService {
     }
 
     public User get(Long id) {
-        UserEntity userEntity = UserEntity.findById(id);
+        UserEntity userEntity = UserEntity.<UserEntity>findByIdOptional(id).orElseThrow(NotFoundException::new);
         return map(userEntity);
     }
 
