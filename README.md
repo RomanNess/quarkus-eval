@@ -1,50 +1,31 @@
 # quarkus-eval project
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
+Evaluating Quarkus 1.11.1 as an alternative to Spring Boot.
 
-If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
+## Features
+- [x] Endpoints with JAX RS via `quarkus-resteasy` & `quarkus-resteasy-jackson`.
+- [x] Persistence with Panache using quarkus-hibernate-orm-panache. 
+  A Postgres container is provided via `docker-compose.yml`.
+- [x] Flyway migrations via `quarkus-flyway.
+- [x] OpenApi / SwaggerUI via `quarkus-smallrye-openapi`.
+- [x] Hibernate Validator via `quarkus-hibernate-validator`.
+
+## Stumbling blocks
+- I had quite a few troubles to get `lombok` and `mapstruct` working together.
+  `mapstruct` would not see the builders of my value objects reliably.
+  Only the solution with annotation processors was working reliably in the end.
+  Not sure though if this is caused by Quarkus or the newest versions of the library itself.
+- There is no `@Sql` equivalent to execute DB scripts before and after tests.
+  There is an extension based upon flyway though (https://github.com/radcortez/flyway-junit5-extensions).
+  For now I did a quick and dirty flyway migration manually before every test method.
 
 ## Running the application in dev mode
 
-You can run your application in dev mode that enables live coding using:
-```shell script
-./mvnw compile quarkus:dev
-```
-
-## Packaging and running the application
-
-The application can be packaged using:
-```shell script
-./mvnw package
-```
-It produces the `quarkus-eval-1.0.0-SNAPSHOT-runner.jar` file in the `/target` directory.
-Be aware that it’s not an _über-jar_ as the dependencies are copied into the `target/lib` directory.
-
-If you want to build an _über-jar_, execute the following command:
-```shell script
-./mvnw package -Dquarkus.package.type=uber-jar
-```
-
-The application is now runnable using `java -jar target/quarkus-eval-1.0.0-SNAPSHOT-runner.jar`.
+You can run your application in dev mode that enables live coding using 
+`./mvnw compile quarkus:dev` or `make run`. 
+- It seems like mapstruct cannot handle all changes in dev mode (probably because annotation processors do not run on reload).
 
 ## Creating a native executable
+`make native-build` to build a docker image with native executable.
 
-You can create a native executable using: 
-```shell script
-./mvnw package -Pnative
-```
-
-Or, if you don't have GraalVM installed, you can run the native executable build in a container using: 
-```shell script
-./mvnw package -Pnative -Dquarkus.native.container-build=true
-```
-
-You can then execute your native executable with: `./target/quarkus-eval-1.0.0-SNAPSHOT-runner`
-
-If you want to learn more about building native executables, please consult https://quarkus.io/guides/maven-tooling.html.
-
-# RESTEasy JAX-RS
-
-<p>A Hello World RESTEasy resource</p>
-
-Guide: https://quarkus.io/guides/rest-json
+`make native-run` to run it. Though, the current config will only run on Macs.
