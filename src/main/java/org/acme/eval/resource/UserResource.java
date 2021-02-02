@@ -5,6 +5,7 @@ import org.acme.eval.model.UserList;
 import org.acme.eval.service.UserService;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -41,14 +42,14 @@ public class UserResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void post(User user) {
+    public void post(@Valid User user) {
         userService.post(user);
     }
 
     @PUT
     @Path("/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void put(@PathParam("id") Long id, User user) {
+    public void put(@PathParam("id") Long id, @Valid User user) {
         userService.put(id, user);
     }
 

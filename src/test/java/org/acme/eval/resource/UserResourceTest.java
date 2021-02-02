@@ -89,6 +89,16 @@ class UserResourceTest {
     }
 
     @Test
+    void post_400() {
+        given()
+                .contentType(ContentType.JSON)
+                .body(loadResource("json/createUser_emptyUsername.json"))
+                .when().post("/users")
+                .then()
+                .statusCode(400);
+    }
+
+    @Test
     void put() {
         given()
                 .contentType(ContentType.JSON)
@@ -116,6 +126,16 @@ class UserResourceTest {
                 .when().put("/users/666")
                 .then()
                 .statusCode(404);
+    }
+
+    @Test
+    void put_400() {
+        given()
+                .contentType(ContentType.JSON)
+                .body(loadResource("json/createUser_emptyUsername.json"))
+                .when().put("/users/1")
+                .then()
+                .statusCode(400);
     }
 
     @Test
