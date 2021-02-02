@@ -9,6 +9,7 @@ Evaluating Quarkus 1.11.1 as an alternative to Spring Boot.
 - [x] Flyway migrations via `quarkus-flyway.
 - [x] OpenApi / SwaggerUI via `quarkus-smallrye-openapi`.
 - [x] Hibernate Validator via `quarkus-hibernate-validator`.
+- [x] Health Check including live/ready via `quarkus-smallrye-health` on `/q/health`.
 
 ## Stumbling blocks
 - I had quite a few troubles to get `lombok` and `mapstruct` working together.
