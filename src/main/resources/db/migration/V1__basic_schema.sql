@@ -1,6 +1,6 @@
 create sequence hibernate_sequence start 100 increment 1;
 
-create table UserEntity
+create table users
 (
     id       int8 not null,
     username varchar(255),
