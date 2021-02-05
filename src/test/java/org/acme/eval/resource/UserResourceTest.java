@@ -1,7 +1,9 @@
 package org.acme.eval.resource;
 
+import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
+import org.acme.eval.PostgresResource;
 import org.acme.eval.model.User;
 import org.acme.eval.model.UserList;
 import org.flywaydb.core.Flyway;
@@ -19,6 +21,7 @@ import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @QuarkusTest
+@QuarkusTestResource(PostgresResource.class)
 class UserResourceTest {
 
     @Inject

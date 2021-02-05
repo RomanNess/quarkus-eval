@@ -5,7 +5,9 @@ Evaluating Quarkus 1.11.1 as an alternative to Spring Boot.
 ## Features
 - [x] Endpoints with JAX RS via `quarkus-resteasy` & `quarkus-resteasy-jackson`.
 - [x] Persistence with Panache using quarkus-hibernate-orm-panache. 
-  A Postgres container is provided via `docker-compose.yml`.
+  A Postgres container to run the app locally is provided via `docker-compose.yml`.
+- [x] Persistence for unit tests with testcontainers. 
+  No manual startup of a postgres container necessary for tests.
 - [x] Flyway migrations via `quarkus-flyway.
 - [x] OpenApi / SwaggerUI via `quarkus-smallrye-openapi`.
 - [x] Hibernate Validator via `quarkus-hibernate-validator`.
