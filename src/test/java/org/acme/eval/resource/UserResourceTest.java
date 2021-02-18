@@ -6,6 +6,7 @@ import io.restassured.http.ContentType;
 import org.acme.eval.PostgresResource;
 import org.acme.eval.model.User;
 import org.acme.eval.model.UserList;
+import org.acme.eval.resource.exception.ErrorDto;
 import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -64,11 +65,14 @@ class UserResourceTest {
 
     @Test
     void get_404() {
-        given()
+        ErrorDto errorDto = given()
                 .contentType(ContentType.JSON)
                 .when().get("/users/666")
                 .then()
-                .statusCode(404);
+                .statusCode(404)
+                .extract().as(ErrorDto.class);
+
+        assertThat(errorDto.getMessage()).isEqualTo("User not found.");
     }
 
     @Test
@@ -123,12 +127,15 @@ class UserResourceTest {
 
     @Test
     void put_404() {
-        given()
+        ErrorDto errorDto = given()
                 .contentType(ContentType.JSON)
                 .body(loadResource("json/createUser.json"))
                 .when().put("/users/666")
                 .then()
-                .statusCode(404);
+                .statusCode(404)
+                .extract().as(ErrorDto.class);
+
+        assertThat(errorDto.getMessage()).isEqualTo("User not found.");
     }
 
     @Test
@@ -157,10 +164,13 @@ class UserResourceTest {
 
     @Test
     void delete_404() {
-        given()
+        ErrorDto errorDto = given()
                 .when().delete("/users/666")
                 .then()
-                .statusCode(404);
+                .statusCode(404)
+                .extract().as(ErrorDto.class);
+
+        assertThat(errorDto.getMessage()).isEqualTo("User not found.");
     }
 
     private String loadResource(String filename) {

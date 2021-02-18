@@ -2,11 +2,11 @@ package org.acme.eval.service;
 
 import org.acme.eval.model.User;
 import org.acme.eval.persistence.UserEntity;
+import org.acme.eval.resource.exception.NotFoundException;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
-import javax.ws.rs.NotFoundException;
 import java.util.List;
 
 @ApplicationScoped
@@ -25,7 +25,7 @@ public class UserService {
     }
 
     public User get(Long id) {
-        UserEntity userEntity = UserEntity.<UserEntity>findByIdOptional(id).orElseThrow(NotFoundException::new);
+        UserEntity userEntity = UserEntity.<UserEntity>findByIdOptional(id).orElseThrow(() -> new NotFoundException("User not found."));
         return userMapper.fromEntity(userEntity);
     }
 
@@ -37,14 +37,14 @@ public class UserService {
 
     @Transactional
     public void put(Long id, User user) {
-        UserEntity persistedUser = UserEntity.<UserEntity>findByIdOptional(id).orElseThrow(NotFoundException::new);
+        UserEntity persistedUser = UserEntity.<UserEntity>findByIdOptional(id).orElseThrow(() -> new NotFoundException("User not found."));
         userMapper.fill(persistedUser, user);
     }
 
     @Transactional
     public void delete(Long id) {
         if (!UserEntity.deleteById(id)) {
-            throw new NotFoundException();
+            throw new NotFoundException("User not found.");
         }
     }
 }
