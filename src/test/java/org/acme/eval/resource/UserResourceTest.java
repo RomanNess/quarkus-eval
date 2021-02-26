@@ -29,7 +29,6 @@ import static org.assertj.core.api.Assertions.assertThat;
                 @ConfigProperty(key = "space.testflight.jdbc.username.property", value = "quarkus.datasource.username"),
                 @ConfigProperty(key = "space.testflight.jdbc.password.property", value = "quarkus.datasource.password")
         })
-//@TestTransaction
 @QuarkusTest
 class UserResourceTest {
 
