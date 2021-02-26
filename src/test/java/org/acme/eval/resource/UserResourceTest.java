@@ -1,5 +1,6 @@
 package org.acme.eval.resource;
 
+import io.quarkus.test.TestTransaction;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
@@ -7,12 +8,12 @@ import org.acme.eval.PostgresResource;
 import org.acme.eval.model.User;
 import org.acme.eval.model.UserList;
 import org.acme.eval.resource.exception.ErrorDto;
-import org.flywaydb.core.Flyway;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import space.testflight.ConfigProperty;
+import space.testflight.Flyway;
 
 import javax.inject.Inject;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -21,22 +22,31 @@ import java.util.Scanner;
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
 
+//@QuarkusTestResource(PostgresResource.class)
+@Flyway(dockerImage = "postgres:12",
+        configuration = {
+                @ConfigProperty(key = "space.testflight.jdbc.url.property", value = "quarkus.datasource.jdbc.url"),
+                @ConfigProperty(key = "space.testflight.jdbc.username.property", value = "quarkus.datasource.username"),
+                @ConfigProperty(key = "space.testflight.jdbc.password.property", value = "quarkus.datasource.password")
+        })
+//@TestTransaction
 @QuarkusTest
-@QuarkusTestResource(PostgresResource.class)
 class UserResourceTest {
 
-    @Inject
-    Flyway flyway;
+//    @Inject
+//    Flyway flyway;
 
     // fixme: poor man's db lifecycle
-    @BeforeEach
-    void init() {
-        flyway.clean();
-        flyway.migrate();
-    }
+//    @BeforeEach
+//    void init() {
+//        flyway.clean();
+//        flyway.migrate();
+//    }
 
     @Test
-    void getAll() {
+    void getAll() throws InterruptedException {
+
+
         UserList users = given()
                 .contentType(ContentType.JSON)
                 .when().get("/users")

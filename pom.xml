@@ -54,10 +54,16 @@
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-jdbc-postgresql</artifactId>
         </dependency>
-        <dependency>
-            <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-flyway</artifactId>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.quarkus</groupId>-->
+<!--            <artifactId>quarkus-flyway</artifactId>-->
+<!--            <exclusions>-->
+<!--                <exclusion>-->
+<!--                    <groupId>io.quarkus</groupId>-->
+<!--                    <artifactId>quarkus-agroal</artifactId>-->
+<!--                </exclusion>-->
+<!--            </exclusions>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>io.quarkus</groupId>
             <artifactId>quarkus-hibernate-validator</artifactId>
@@ -76,6 +82,11 @@
         </dependency>
 
         <dependency>
+            <groupId>space.testflight</groupId>
+            <artifactId>testflight</artifactId>
+            <version>0.1.3</version>
+        </dependency>
+        <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
             <version>${mapstruct.version}</version>
@@ -85,6 +96,30 @@
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
             <scope>provided</scope>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.agroal</groupId>-->
+<!--            <artifactId>agroal-pool</artifactId>-->
+<!--            <version>1.9</version>-->
+<!--&lt;!&ndash;            <scope>provided</scope>&ndash;&gt;-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>io.agroal</groupId>-->
+<!--            <artifactId>agroal-api</artifactId>-->
+<!--            <version>1.9</version>-->
+<!--        </dependency>-->
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-c3p0</artifactId>
+            <version>5.4.27.Final</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.mchange</groupId>
+            <artifactId>c3p0</artifactId>
+            <version>0.9.5.2</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>

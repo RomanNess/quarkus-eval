@@ -15,20 +15,26 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import io.agroal.api.AgroalDataSource;
 
 @Path("/users")
 @Produces(MediaType.APPLICATION_JSON)
 public class UserResource {
 
     private final UserService userService;
+    private final AgroalDataSource agroalDataSource;
 
     @Inject
-    public UserResource(UserService userService) {
+    public UserResource(UserService userService, AgroalDataSource agroalDataSource) {
         this.userService = userService;
+        this.agroalDataSource = agroalDataSource;
     }
 
     @GET
     public UserList getAll() {
+
+//        agroalDataSource.flush(AgroalDataSource.FlushMode.INVALID);
+
         return UserList.builder()
                 .users(userService.getAll())
                 .build();
@@ -37,6 +43,9 @@ public class UserResource {
     @GET
     @Path("/{id}")
     public User get(@PathParam("id") Long id) {
+
+//        agroalDataSource.flush(AgroalDataSource.FlushMode.INVALID);
+
         return userService.get(id);
     }
 
