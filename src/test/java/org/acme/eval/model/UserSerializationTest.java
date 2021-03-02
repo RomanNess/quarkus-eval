@@ -2,7 +2,7 @@ package org.acme.eval.model;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.quarkus.test.junit.QuarkusTest;
+import org.acme.eval.MyQuarkusTest;
 import org.junit.jupiter.api.Test;
 
 import javax.inject.Inject;
@@ -10,7 +10,7 @@ import javax.inject.Inject;
 import static net.javacrumbs.jsonunit.assertj.JsonAssertions.assertThatJson;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@QuarkusTest
+@MyQuarkusTest
 public class UserSerializationTest {
 
     @Inject
