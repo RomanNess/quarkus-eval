@@ -21,18 +21,14 @@ import javax.ws.rs.core.MediaType;
 public class UserResource {
 
     private final UserService userService;
-    private final AgroalDataSource agroalDataSource;
 
     @Inject
-    public UserResource(UserService userService, AgroalDataSource agroalDataSource) {
+    public UserResource(UserService userService) {
         this.userService = userService;
-        this.agroalDataSource = agroalDataSource;
     }
 
     @GET
     public UserList getAll() {
-
-//        agroalDataSource.flush(AgroalDataSource.FlushMode.INVALID);
 
         return UserList.builder()
                 .users(userService.getAll())
@@ -42,8 +38,6 @@ public class UserResource {
     @GET
     @Path("/{id}")
     public User get(@PathParam("id") Long id) {
-
-//        agroalDataSource.flush(AgroalDataSource.FlushMode.INVALID);
 
         return userService.get(id);
     }
