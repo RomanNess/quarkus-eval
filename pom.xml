@@ -19,8 +19,8 @@
         <quarkus.platform.version>1.11.1.Final</quarkus.platform.version>
         <surefire-plugin.version>2.22.1</surefire-plugin.version>
 
-        <lombok.version>1.18.18</lombok.version>
-        <mapstruct.version>1.4.1.Final</mapstruct.version>
+        <lombok.version>1.18.20</lombok.version>
+        <mapstruct.version>1.4.2.Final</mapstruct.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -97,17 +97,6 @@
             <version>${lombok.version}</version>
             <scope>provided</scope>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>io.agroal</groupId>-->
-<!--            <artifactId>agroal-pool</artifactId>-->
-<!--            <version>1.9</version>-->
-<!--&lt;!&ndash;            <scope>provided</scope>&ndash;&gt;-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>io.agroal</groupId>-->
-<!--            <artifactId>agroal-api</artifactId>-->
-<!--            <version>1.9</version>-->
-<!--        </dependency>-->
 
         <dependency>
             <groupId>org.hibernate</groupId>

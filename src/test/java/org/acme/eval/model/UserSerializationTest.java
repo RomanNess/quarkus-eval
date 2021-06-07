@@ -18,8 +18,8 @@ public class UserSerializationTest {
 
     @Test
     void serializeUser() throws JsonProcessingException {
-
         String json = objectMapper.writeValueAsString(provideUser());
+
         assertThatJson(json).inPath("$.id").isEqualTo(1L);
         assertThatJson(json).inPath("$.username").isEqualTo("foo");
     }
@@ -27,8 +27,8 @@ public class UserSerializationTest {
     @Test
     void deserializeUser() throws JsonProcessingException {
         String json = objectMapper.writeValueAsString(provideUser());
-
         User user = objectMapper.readValue(json, User.class);
+
         assertThat(user.getId()).isEqualTo(1L);
         assertThat(user.getUsername()).isEqualTo("foo");
     }
