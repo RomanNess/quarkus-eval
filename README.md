@@ -1,6 +1,6 @@
 # quarkus-eval project
 
-Evaluating Quarkus 1.11.1 as an alternative to Spring Boot.
+Evaluating Quarkus 1.12.2 as an alternative to Spring Boot.
 
 ## Features
 - [x] Endpoints with JAX RS via `quarkus-resteasy` & `quarkus-resteasy-jackson`.
